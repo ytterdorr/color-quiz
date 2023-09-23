@@ -6,6 +6,7 @@ import Game from "./Game";
 // =o= 1. Create a game state machine
 // =o= 2. Display a bunch of colors
 // =o= 3. Display one color at a time, and move forward with a button
+// =o= 4. Add input field under for guessing name, and check if name is correct
 export default function App() {
 
     const [gameState, setGameState] = useState<'start' | 'play' | 'finish'>('start')
