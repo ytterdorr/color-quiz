@@ -1,6 +1,7 @@
-import { Button, Flex, Text } from "@mantine/core"
+import { Button } from "@mantine/core"
 import { useState } from "react"
 import { BasicColors } from "./assets/basic-colors"
+import Game from "./Game";
 // TODOs
 // =o= 1. Create a game state machine
 // =o= 2. Display a bunch of colors
@@ -8,7 +9,7 @@ import { BasicColors } from "./assets/basic-colors"
 export default function App() {
 
     const [gameState, setGameState] = useState<'start' | 'play' | 'finish'>('start')
-    const colors = BasicColors;
+    const colors = Object.entries(BasicColors).map(([name, hex]) => ({ name, hex }));
     return (
         <>
             {gameState === 'start' && (
@@ -20,15 +21,8 @@ export default function App() {
             {gameState === 'play' && (
                 <>
                     <h1>Play</h1>
-                    <Flex dir="row"></Flex>
-                    {Object.entries(colors).map(([name, hex]) => (
-                        <>
-                            <Text>{name}</Text>
-                            <div style={{ backgroundColor: hex, width: "200px", height: "100px" }} />
-                        </>
-                    ))}
-                    <Button onClick={() => setGameState('finish')}>Finish</Button>
-
+                    <Game
+                        colorList={colors} onEndGame={() => setGameState('finish')} />
                 </>
             )}
             {gameState === 'finish' && (
