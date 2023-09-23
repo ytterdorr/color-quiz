@@ -1,20 +1,23 @@
 import { Button, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
+import { Score } from "./types";
 
 type Color = {
     name: string,
     hex: string,
 }
 
+
 export default function App({ colorList, onEndGame }
-    : { colorList: Color[], onEndGame: () => void; }) {
+    : { colorList: Color[], onEndGame: (_score: Score) => void; }) {
     const [colorIndex, setColorIndex] = useState(0);
     const color = colorList[colorIndex];
     const [nameInput, setNameInput] = useState('');
     const [nameError, setNameError] = useState('');
     const endGame = () => {
-        onEndGame();
+        onEndGame(score);
     }
+    const [score, setScore] = useState<Score>({});
 
     const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
@@ -26,9 +29,11 @@ export default function App({ colorList, onEndGame }
     const onGuess = () => {
         if (nameInput === color.name) {
             setNameError(`Korrekt! ${color.name}: ${color.hex}`)
-            setGuessCorrect(true)
+            setGuessCorrect(true);
+            setScore((prev) => ({ ...prev, [color.name]: true }));
         } else {
             setNameError("Nej, det är: " + color.name)
+            setScore((prev) => ({ ...prev, [color.name]: false }));
         }
     }
 
