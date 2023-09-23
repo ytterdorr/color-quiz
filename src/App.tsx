@@ -1,6 +1,6 @@
 import { Button, Text } from "@mantine/core"
 import { useState } from "react"
-import { BasicColors, ThreeColors } from "./assets/basic-colors"
+import { BasicColors, ThreeColors, Reds, yellows } from "./assets/basic-colors"
 import Game from "./Game";
 import { Score } from "./types";
 // TODOs
@@ -14,7 +14,7 @@ export default function App() {
     const [gameState, setGameState] = useState<'start' | 'play' | 'finish'>('start')
     const [score, setScore] = useState<Score>({});
     const [points, setPoints] = useState<number>(0);
-    const colors = ThreeColors;
+    const [colors, setColors] = useState<Record<string, string>>(BasicColors);
     const colorList = Object.entries(colors).map(([name, hex]) => ({ name, hex }));
 
     const setStart = () => {
@@ -40,6 +40,10 @@ export default function App() {
                 <>
                     <h1>Start</h1>
                     <Button onClick={() => setGameState('play')}>Play</Button>
+                    <Button onClick={() => setColors(ThreeColors)}>Three Colors</Button>
+                    <Button onClick={() => setColors(BasicColors)}>Basic Colors</Button>
+                    <Button onClick={() => setColors(Reds)}>Reds</Button>
+                    <Button onClick={() => setColors(yellows)}>Yellows</Button>
                 </>
             )}
             {gameState === 'play' && (
