@@ -1,3 +1,6 @@
+// A good list of colors:
+// https://learn.coderslang.com/0028-html-colors-with-names-hex-and-rgb-codes/
+
 export const BasicColors = {
     "aqua": '#00ffff',
     "black": '#000000',
