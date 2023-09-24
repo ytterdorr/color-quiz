@@ -1,12 +1,6 @@
 import { Button, Text, TextInput } from "@mantine/core";
 import { useState } from "react";
-import { Score } from "./types";
-
-type Color = {
-    name: string,
-    hex: string,
-}
-
+import { Score, Color } from "./types";
 
 export default function App({ colorList, onEndGame }
     : { colorList: Color[], onEndGame: (_score: Score) => void; }) {
